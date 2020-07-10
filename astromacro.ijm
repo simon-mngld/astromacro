@@ -1,28 +1,68 @@
+// Settings
+extension = ".czi";
+
 macro "Nuclear Quantification" {
 
     dirin = getDirectory("Choose input directory...");
-    list = getFileList(dirin);
+    
+    //--------------------------------------------
+    // Extract wanted files into the "list array"
+    
+    tlist = newArray(100);
+    temp = getFileList(dirin);
+    
+    c = -1;
+    for (t=0;t<temp.length; t++) {
+        
+        if (indexOf(temp[t], extension, 0) > 0) {
+            c++;
+            tlist[c] = temp[t];
+        } 
+    }
+    
+    if (c==-1) {
+        print ("No valid file found in: "+dirin);
+        exit;
+    }
+    
+    list = Array.slice(tlist,0,c+1);
+    //--------------------------------------------
+    
+    
     run("Set Measurements...", "min integrated redirect=None decimal=3");
 
     setBatchMode(true);
-    print("Number of files:" + list.length)
+    print("Number of files:" + list.length);
 
     for (n = 0; n<list.length; n++) {
-        actualFolder = dirin + list[n];
-        actualList = getFileList(actualFolder);
         
-        //print("Ordner "+n + " -- " + actualFolder);
-    
+        print(list[n]);
+        
         k = 0;
         title = list[n];
         print(title + " scanning...");
         setResult(title + "Mean", 0, 0);
         updateResults();
+        
+        roiManager("reset");
+        
+        open(list[n]);
+        
+        ch = getImageInfo();
+        print(ch);
+        
+        /*
+        //actualFolder = dirin + list[n];
+        //actualList = getFileList(actualFolder);
+        
+        //print("Ordner "+n + " -- " + actualFolder);
+    
+        
 
-        print("Test");
+        
         for (i=0; i<actualList.length; i++) {
             
-            roiManager("reset");
+            
         
             //Astro
             open(actualFolder+actualList[i]);
@@ -44,8 +84,6 @@ macro "Nuclear Quantification" {
             setThreshold(120, 255);
             run("Convert to Mask");
             run("Analyze Particles...", "size=700-200000 circularity=0.0-1.00 exclude show=Nothing add");
-
-    
 
             selectWindow(C3);
             //setMinAndMax(25, 255);
@@ -72,8 +110,11 @@ macro "Nuclear Quantification" {
             }
             //----------------------------------------------------------
 
-            roiManager("Reset");
-            run("Close All");
+            
         }
+        */
+        
+        roiManager("Reset");
+        run("Close All");
     }
 }

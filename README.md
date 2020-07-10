@@ -9,7 +9,7 @@ It is **not** working yet. This repo is meant to start developing it.
 You need:
 
 * Fiji (ImageJ)
-* Addon: (Ijp-Toolkit)[https://github.com/ij-plugins/ijp-toolkit/wiki/Fiji-Managed-Installation]
+* Addon: [Ijp-Toolkit](https://github.com/ij-plugins/ijp-toolkit/wiki/Fiji-Managed-Installation)
 
 ## Commands used in this script
 

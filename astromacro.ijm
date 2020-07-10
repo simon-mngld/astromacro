@@ -27,15 +27,12 @@ macro "Nuclear Quantification" {
             //Astro
             open(actualFolder+actualList[i]);
             Astro = getTitle();
-            print("Astro: "+Astro);
         
             //C3
             i++;
             i++;
             open(actualFolder+actualList[i]);
             C3 = getTitle();
-            print("C3:"+C3);
-        
         
             selectWindow(Astro);
             run("Subtract Background...", "rolling=50 sliding");

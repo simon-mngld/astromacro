@@ -1,12 +1,16 @@
 // Settings
 extension = ".tif";
 
+print("\\Clear");
+
 macro "Nuclear Quantification" {
 
+    
     dirin = getDirectory("Choose input directory...");
+    start = getTime();
+    list = getFileList(dirin);
     
-    
-    
+    /*
     //--------------------------------------------
     // Extract wanted files into the "list array"
     
@@ -29,7 +33,9 @@ macro "Nuclear Quantification" {
     
     list = Array.slice(tlist,0,c+1);
     //--------------------------------------------
+    */
     
+    //Array.print(list);
     
     run("Set Measurements...", "min integrated redirect=None decimal=3");
 
@@ -48,15 +54,17 @@ macro "Nuclear Quantification" {
         
         roiManager("reset");
         
-        open(list[n]);
+        //open(list[n]);
         
         
         
-        /*
-        //actualFolder = dirin + list[n];
-        //actualList = getFileList(actualFolder);
         
-        //print("Ordner "+n + " -- " + actualFolder);
+        actualFolder = dirin + list[n];
+        actualList = getFileList(actualFolder);
+        
+        
+        
+        print("Ordner "+n + " -- " + actualFolder);
     
         
 
@@ -68,12 +76,14 @@ macro "Nuclear Quantification" {
             //Astro
             open(actualFolder+actualList[i]);
             Astro = getTitle();
-        
+            print(Astro);
+            
             //C3
             i++;
             i++;
             open(actualFolder+actualList[i]);
             C3 = getTitle();
+            print(C3);
         
             selectWindow(Astro);
             run("Subtract Background...", "rolling=50 sliding");
@@ -113,9 +123,16 @@ macro "Nuclear Quantification" {
 
             
         }
-        */
+        
         
         roiManager("Reset");
         run("Close All");
+        
+
     }
+    
+    scripttime = (getTime() - start)/1000;
+    print ("Script execution time: "+scripttime+"s");    
+    
 }
+

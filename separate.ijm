@@ -5,6 +5,8 @@ requires("1.52s");
 filetype = ".czi";
 
 print("\\Clear");
+
+setBatchMode(true);
 MainDir = getDirectory("Choose starting directory...");
 checkFiles(MainDir);
 
@@ -40,21 +42,26 @@ function split(){
     print ("ImageTitle: "+ImageTitle);
 
     if (channels+slices > 2) {
-        File.makeDirectory(ImageDir+ImageTitle);
-        saveDir = ImageDir+ImageTitle+"/";
+        File.makeDirectory(ImageDir+ImageTitle+"#");
+        saveDir = ImageDir+ImageTitle+"#/";
 
         File.setDefaultDir(saveDir);
 
         run("Image Sequence... ", "format=TIFF digits=2 name=img");
 
         images = getFileList(saveDir);
-
-        for (i=0;i<images.length;i++) {
-            tempdir = substring(images[i],0,7);
-            File.makeDirectory(saveDir+tempdir);
-            File.copy(saveDir+images[i],saveDir+tempdir+"/"+images[i]);
-            t = File.delete(saveDir+images[i]);
+        
+        //print("SaveDir: "+saveDir);
+        
+        if (slices>1) {
+            for (i=0;i<images.length;i++) {
+                tempdir = substring(images[i],0,7);
+                File.makeDirectory(saveDir+tempdir);
+                File.copy(saveDir+images[i],saveDir+tempdir+"/"+images[i]);
+                t = File.delete(saveDir+images[i]);
+            }
         }
+        
     } else {
         print("File does not contain layers: No operation performed.");
     }

@@ -1,9 +1,11 @@
 // Settings
-extension = ".czi";
+extension = ".tif";
 
 macro "Nuclear Quantification" {
 
     dirin = getDirectory("Choose input directory...");
+    
+    
     
     //--------------------------------------------
     // Extract wanted files into the "list array"
@@ -48,8 +50,7 @@ macro "Nuclear Quantification" {
         
         open(list[n]);
         
-        ch = getImageInfo();
-        print(ch);
+        
         
         /*
         //actualFolder = dirin + list[n];

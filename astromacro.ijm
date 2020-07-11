@@ -1,5 +1,6 @@
 // Settings
 extension = ".tif";
+showimages = true;      // display the images while the macro runs
 
 print("\\Clear");
 
@@ -39,7 +40,8 @@ macro "Nuclear Quantification" {
     
     run("Set Measurements...", "min integrated redirect=None decimal=3");
 
-    setBatchMode(true);
+    if (!showimages) setBatchMode(true);
+    
     print("Number of files:" + list.length);
 
     for (n = 0; n<list.length; n++) {
@@ -100,7 +102,7 @@ macro "Nuclear Quantification" {
             //setMinAndMax(25, 255);
             //run("Apply LUT");
             roiManager("Show All without labels");
-            //waitForUser("");
+            if (showimages) waitForUser("Klicken, um fortzufuehren");
 
             run("Set Measurements...", "mean integrated redirect=None decimal=3");
 

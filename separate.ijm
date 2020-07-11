@@ -1,8 +1,8 @@
 // Separate Layers and Channels of images
 requires("1.52s");
 
-// Set your image file type here
-filetype = ".czi";
+// Settings
+filetype = ".czi";      // Set your image file type here
 
 print("\\Clear");
 

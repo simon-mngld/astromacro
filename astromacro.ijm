@@ -7,7 +7,7 @@ print("\\Clear");
 macro "Nuclear Quantification" {
 
     
-    dirin = getDirectory("Choose input directory...");
+    dirin = getDirectory("Choose input directory...");  // lets the user choose the upper folder containing subfolders containg acquisitions: /chosen-folder/folder/acquisition.czi
     start = getTime();
     list = getFileList(dirin);
     
@@ -89,11 +89,11 @@ macro "Nuclear Quantification" {
         
             selectWindow(Astro);
             run("Subtract Background...", "rolling=50 sliding");
-            setMinAndMax(50, 200);
+            setMinAndMax(10, 200);
             run("Apply LUT");
             run("Despeckle");
             run("Median...", "radius=2");
-            run("k-means Clustering ...", "number_of_clusters=5 cluster_center_tolerance=0.00010000 enable_randomization_seed randomization_seed=48 show_clusters_as_centroid_value");
+            run("k-means Clustering ...", "number_of_clusters=3 cluster_center_tolerance=0.00010000 enable_randomization_seed randomization_seed=48 show_clusters_as_centroid_value");
             setThreshold(120, 255);
             run("Convert to Mask");
             run("Analyze Particles...", "size=700-200000 circularity=0.0-1.00 exclude show=Nothing add");

@@ -88,18 +88,18 @@ macro "Nuclear Quantification" {
             print(C3);
         
             selectWindow(Astro);
-            run("Subtract Background...", "rolling=50 sliding");
-            setMinAndMax(10, 200);
+            run("Subtract Background...", "rolling=100 sliding");
+            setMinAndMax(40, 200);
             run("Apply LUT");
             run("Despeckle");
             run("Median...", "radius=2");
             run("k-means Clustering ...", "number_of_clusters=3 cluster_center_tolerance=0.00010000 enable_randomization_seed randomization_seed=48 show_clusters_as_centroid_value");
-            setThreshold(120, 255);
+            setThreshold(50, 255);
             run("Convert to Mask");
-            run("Analyze Particles...", "size=700-200000 circularity=0.0-1.00 exclude show=Nothing add");
+            run("Analyze Particles...", "size=1000-200000 circularity=0.0-1.00 exclude show=Nothing add");
 
-            selectWindow(C3);
-            //setMinAndMax(25, 255);
+            selectWindow(Astro);
+            //setMinAndMax(10, 255);
             //run("Apply LUT");
             roiManager("Show All without labels");
             if (showimages) waitForUser("Klicken, um fortzufuehren");
@@ -121,7 +121,7 @@ macro "Nuclear Quantification" {
                 //IJ.deleteRows(nResults-roiManager("count"), nResults);
                 updateResults();
             }
-            //----------------------------------------------------------
+            //------------------------------------------------------
 
             
         }

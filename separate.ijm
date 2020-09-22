@@ -41,7 +41,7 @@ function split(){
     print ("ImageDir: "+ImageDir);
     print ("ImageTitle: "+ImageTitle);
 
-    if (channels+slices > 2) {
+    if (channels+slices > 1) {
         File.makeDirectory(ImageDir+ImageTitle+"#");
         saveDir = ImageDir+ImageTitle+"#/";
 

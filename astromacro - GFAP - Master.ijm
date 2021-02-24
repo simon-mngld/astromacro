@@ -51,54 +51,49 @@ macro "Nuclear Quantification" {
         k = 0;
         title = list[n];
         print(title + " scanning...");
-        setResult(title + "Mean", 0, 0);
-        updateResults();
+    //    setResult(title + "Mean", 0, 0);
+    //    updateResults();
         
         roiManager("reset");
         
         //open(list[n]);
         
-        
-        
-        
         actualFolder = dirin + list[n];
-        actualList = getFileList(actualFolder);
-        
-        
+        actualList = getFileList(actualFolder);    
         
         print("Ordner "+n + " -- " + actualFolder);
-    
-        
-
         
         for (i=0; i<actualList.length; i++) {
             
-            
-        
             //Astro
             open(actualFolder+actualList[i]);
             Astro = getTitle();
             print(Astro);
             
-            //C3
-            //i++;
-            i++;
+            //Astro2
             open(actualFolder+actualList[i]);
-            C3 = getTitle();
-            print(C3);
+            Astro2 = getTitle();
+            print(Astro2);
+            
+
+            //C3
+            i++;
+            i++;
+            //C3 = getTitle();
+            //print(C3);
         
             selectWindow(Astro);
-            run("Subtract Background...", "rolling=50 sliding");
-            setMinAndMax(40, 200);
+run("Subtract Background...", "rolling=50 sliding");
+            setMinAndMax(10, 255);
             run("Apply LUT");
-            run("Despeckle");
+            //run("Despeckle");
             run("Median...", "radius=2");
-            run("k-means Clustering ...", "number_of_clusters=3 cluster_center_tolerance=0.00010000 enable_randomization_seed randomization_seed=32 show_clusters_as_centroid_value");
-            setThreshold(50, 255);
+            run("k-means Clustering ...", "number_of_clusters=7 cluster_center_tolerance=700 enable_randomization_seed randomization_seed=1000 show_clusters_as_centroid_value");
+            setThreshold(10, 255);
             run("Convert to Mask");
-            run("Analyze Particles...", "size=600-200000 circularity=0.0-1.00 exclude show=Nothing add");
+run("Analyze Particles...", "size=800-70000 circularity=0.0-1.00 show=Nothing add");
 
-            selectWindow(Astro);
+            selectWindow(Astro2);
             //setMinAndMax(10, 255);
             //run("Apply LUT");
             roiManager("Show All without labels");
@@ -108,16 +103,20 @@ macro "Nuclear Quantification" {
 
             //----------------------------------------------------------
             for(j=0; j<roiManager("count"); j++) {
-
+               
                 roiManager("select", j);
-                List.setMeasurements;
-                mean = List.getValue("Mean");
-    
-                setResult(title + "Mean", k, mean);
-                //setResult(title+"intensity", k, intensity);
+                //List.setMeasurements;
+                //mean = List.getValue("Mean");
+                //integrated = List.getValue("IntDen");
+    			//mean = getValue("Mean");
+    			IntDen = getValue("IntDen");
+    			//Area = getValue("Area");
+                //setResult(title + "Mean", k, mean);
+                //setResult(title + "Area", k, Area);
+                setResult(title + "IntDen", k, IntDen);
                 k++;
     
-                updateResults();
+              //  updateResults();
                 //IJ.deleteRows(nResults-roiManager("count"), nResults);
                 updateResults();
             }

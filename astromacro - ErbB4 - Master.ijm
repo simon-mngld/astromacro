@@ -51,39 +51,30 @@ macro "Nuclear Quantification" {
         k = 0;
         title = list[n];
         print(title + " scanning...");
-        setResult(title + "Mean", 0, 0);
-        updateResults();
+        //setResult(title + "Mean", 0, 0);
+       // updateResults();
         
         roiManager("reset");
         
         //open(list[n]);
         
-        
-        
-        
         actualFolder = dirin + list[n];
-        actualList = getFileList(actualFolder);
-        
-        
+        actualList = getFileList(actualFolder);    
         
         print("Ordner "+n + " -- " + actualFolder);
-    
-        
-
         
         for (i=0; i<actualList.length; i++) {
             
-            
-        
             //Astro
             open(actualFolder+actualList[i]);
             Astro = getTitle();
             print(Astro);
             
+
             //C3
-            //i++;
             i++;
-            open(actualFolder+actualList[i]);
+            i++;
+            open(actualFolder+actualList[i]);       
             C3 = getTitle();
             print(C3);
         
@@ -98,7 +89,7 @@ macro "Nuclear Quantification" {
             run("Convert to Mask");
             run("Analyze Particles...", "size=600-200000 circularity=0.0-1.00 exclude show=Nothing add");
 
-            selectWindow(Astro);
+            selectWindow(C3);
             //setMinAndMax(10, 255);
             //run("Apply LUT");
             roiManager("Show All without labels");
@@ -109,15 +100,18 @@ macro "Nuclear Quantification" {
             //----------------------------------------------------------
             for(j=0; j<roiManager("count"); j++) {
 
-                roiManager("select", j);
-                List.setMeasurements;
-                mean = List.getValue("Mean");
-    
-                setResult(title + "Mean", k, mean);
-                //setResult(title+"intensity", k, intensity);
+            roiManager("select", j);
+                //List.setMeasurements;
+                //mean = List.getValue("Mean");
+                //integrated = List.getValue("IntDen");
+    			//mean = getValue("Mean");
+    			IntDen = getValue("IntDen");
+    			//Area = getValue("Area");
+                //setResult(title + "Mean", k, mean);
+                //setResult(title + "Area", k, Area);
+                setResult(title + "IntDen", k, IntDen);
                 k++;
-    
-                updateResults();
+
                 //IJ.deleteRows(nResults-roiManager("count"), nResults);
                 updateResults();
             }

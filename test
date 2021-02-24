@@ -1,0 +1,21 @@
+          Astro = getTitle();
+            print(Astro);
+
+            selectWindow(Astro);
+            run("Subtract Background...", "rolling=50 sliding");
+            //setMinAndMax(20, 200);
+            run("Apply LUT");
+            run("Despeckle");
+            run("Median...", "radius=2");
+            run("k-means Clustering ...", "number_of_clusters=2 cluster_center_tolerance=0.00010000 enable_randomization_seed randomization_seed=50 show_clusters_as_centroid_value");
+            //setThreshold(15, 255);
+            run("Convert to Mask");
+            run("Analyze Particles...", "size=1500-200000 circularity=0.0-1.00 exclude show=Nothing add");
+
+            selectWindow(Astro);
+            //setMinAndMax(10, 255);
+            //run("Apply LUT");
+            roiManager("Show All without labels");
+            run("Set Measurements...", "mean integrated redirect=None decimal=3");
+
+

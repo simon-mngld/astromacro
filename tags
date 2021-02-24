@@ -1,0 +1,18 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	0.0.0	//
+Further Ressources	README.md	/^### Further Ressources$/;"	S
+Image J Macro Language Documentation	README.md	/^### Image J Macro Language Documentation$/;"	S
+ImageJ: Macro for measuring colocalization	README.md	/^# ImageJ: Macro for measuring colocalization$/;"	c
+Macro: astromacro.ijm	README.md	/^## Macro: astromacro.ijm$/;"	s
+Macro: separate.ijm	README.md	/^## Macro: separate.ijm$/;"	s
+References	README.md	/^## References$/;"	s
+Requirements	README.md	/^## Requirements$/;"	s
+Some Commands used in the macro scripts	README.md	/^## Some Commands used in the macro scripts$/;"	s
+Some graphical commands explained	README.md	/^## Some graphical commands explained$/;"	s
+Subtract Background	README.md	/^### Subtract Background$/;"	S
+Used Examples	README.md	/^#### Used Examples$/;"	t
